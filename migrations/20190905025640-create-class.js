@@ -27,7 +27,7 @@ module.exports = {
           key: 'id'
         },
         allowNull: false,
-        field: 'teacher_id'
+        field: 'classroom_id'
       },
       createdAt: {
         allowNull: false,
