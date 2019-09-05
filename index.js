@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
 const config = require('./config/config');
+const express = require('express')
+const app = express()
 
 const username = config.development.username;
 const password = config.development.password;
@@ -11,11 +13,15 @@ const sequelize = new Sequelize(`
   postgres://${username}:${password}@${host}:${port}/${database}
 `);
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
+app.get('/', (req, res) => {
+  res.send('Hello World')
+});
+
+app.get('/teachers', (req, res) => {
+  sequelize.query('SELECT * FROM teachers', { type: sequelize.QueryTypes.SELECT})
+  .then(teachers => {
+    res.json(teachers);
   })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
+});
+
+app.listen(3000)
