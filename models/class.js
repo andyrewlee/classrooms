@@ -5,8 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     teacherId: DataTypes.INTEGER,
     classroomId: DataTypes.INTEGER
   }, { tableName: 'classes', underscored: true });
-  Class.associate = function(models) {
-    // associations can be defined here
-  };
+
   return Class;
 };

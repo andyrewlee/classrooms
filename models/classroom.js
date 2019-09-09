@@ -4,8 +4,6 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     address: DataTypes.STRING,
   }, { tableName: 'classrooms', underscored: true });
-  Classroom.associate = function(models) {
-    // associations can be defined here
-  };
+
   return Classroom;
 };
