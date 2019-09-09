@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     teacherId: DataTypes.INTEGER,
     classroomId: DataTypes.INTEGER
-  }, { tableName: 'classes' });
+  }, { tableName: 'classes', underscored: true });
   Class.associate = function(models) {
     // associations can be defined here
   };

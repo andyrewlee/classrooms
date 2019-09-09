@@ -1,27 +1,28 @@
-const Sequelize = require('sequelize');
-const config = require('./config/config');
-const express = require('express')
+const express = require('express');
+const models = require('./models');
 const app = express()
 
-const username = config.development.username;
-const password = config.development.password;
-const host = config.development.host;
-const port = config.development.port;
-const database = config.development.database;
-
-const sequelize = new Sequelize(`
-  postgres://${username}:${password}@${host}:${port}/${database}
-`);
-
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   res.send('Hello World')
 });
 
-app.get('/teachers', (req, res) => {
-  sequelize.query('SELECT * FROM teachers', { type: sequelize.QueryTypes.SELECT})
-  .then(teachers => {
+app.get('/teachers', (_, res) => {
+  models.Teacher.findAll().then((teachers) => {
     res.json(teachers);
   })
 });
+
+app.get('/classes', (_, res) => {
+  models.Class.findAll().then((classes) => {
+    res.json(classes);
+  })
+});
+
+app.get('/classrooms', (_, res) => {
+  models.Classroom.findAll().then((classrooms) => {
+    res.json(classrooms);
+  })
+});
+
 
 app.listen(3000)
