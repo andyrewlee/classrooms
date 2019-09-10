@@ -24,6 +24,26 @@ app.post('/teachers', (req, res) => {
   });
 });
 
+app.patch('/teachers/:id', (req, res) => {
+  const teacherId = req.params.id;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+
+  models.Teacher.update(
+    { firstName, lastName },
+    { where: { id: teacherId } }
+  ).then(() => {
+    res.json({ success: true });
+  })
+});
+
+app.delete('/teachers/:id', (req, res) => {
+  const teacherId = req.params.id;
+  models.Teacher.destroy({ where: { id: teacherId }}).then(() => {
+    res.json({ success: true });
+  })
+});
+
 app.get('/classes', (_, res) => {
   models.Class.findAll().then((classes) => {
     res.json(classes);
