@@ -8,7 +8,7 @@ app.get('/', (_, res) => {
 
 app.get('/teachers', (_, res) => {
   models.Teacher.findAll().then((teachers) => {
-    res.json(teachers[0].getClasses());
+    res.json(teachers);
   })
 });
 
